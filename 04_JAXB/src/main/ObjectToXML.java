@@ -48,7 +48,7 @@ public class ObjectToXML {
 			//Convertimos un objeto a xml y lo imprimimos por pantalla
 			m.marshal(p, System.out);
 			
-			m.marshal(p, new File("partricipante.xml"));
+			m.marshal(p, new File("participante.xml"));
 		} catch (JAXBException e) {
 			System.out.println("Error convertiendo el objeto a formato XML");
 			System.out.println(e.getMessage());
