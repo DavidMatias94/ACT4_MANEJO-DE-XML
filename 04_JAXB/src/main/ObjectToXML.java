@@ -16,14 +16,7 @@ public class ObjectToXML {
 		
 		JAXBContext contexto;
 		try {
-			/*
-			 * Obtiene el contexto asociado a la clase Persona, con dicho
-			 * contexto podremos convertir el objeto a un xml y a la inversa. 
-			 * Provoca una excepción de tipo JAXBException si la clase Persona 
-			 * no cumple los requisitos para la conversión a XML, es decir, 
-			 * contener las anotaciones necesarias y no cuenta con un constructor 
-			 * sin argumentos.
-			 */
+			
 			contexto = JAXBContext.newInstance(Participante.class);//inyeccion de dependecia
 		} catch (JAXBException e) {
 			System.out.println("Error creando el contexto");
