@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-//anotación obligatoria
 @XmlRootElement(name="Concierto")
 
 public class Concierto {
@@ -23,7 +22,7 @@ public class Concierto {
 
 
 
-//creamos getter y setter
+
 	public String getFecha() {
 		return fecha;
 	}

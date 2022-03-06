@@ -16,8 +16,15 @@ public class ObjectToXML {
 		
 		JAXBContext contexto;
 		try {
-			
-			contexto = JAXBContext.newInstance(Participante.class);//inyeccion de dependecia
+			/*
+			 * Obtiene el contexto asociado a la clase Persona, con dicho
+			 * contexto podremos convertir el objeto a un xml y a la inversa. 
+			 * Provoca una excepción de tipo JAXBException si la clase Persona 
+			 * no cumple los requisitos para la conversión a XML, es decir, 
+			 * contener las anotaciones necesarias y no cuenta con un constructor 
+			 * sin argumentos.
+			 */
+			contexto = JAXBContext.newInstance(Concierto.class);//inyeccion de dependecia
 		} catch (JAXBException e) {
 			System.out.println("Error creando el contexto");
 			System.out.println(e.getMessage());
@@ -28,27 +35,36 @@ public class ObjectToXML {
 		Marshaller m;
 		try {
 			/*
-			 
-			 * Con este objeto podremos convertir un objeto en xml
-			 * lo serializaremos
+			 * Obtiene el objeto Marshaller asociado al contexto.
+			 * Con dicho objeto podremos convertir un objeto en xml
+			 * es decir, lo serializaremos
 			 */
 			m = contexto.createMarshaller();
-			
+			/*
+			 * stablecer la propiedad JAXB_FORMATTED_OUTPUT con el valor true 
+			 * permite que en la conversión a formato XML se incluyan retornos 
+			 * de carro e indentación (sangrado del texto). 
+			 * Prueba a ejecutar el programa con los valores true y 
+			 * false para ver la diferencia.
+			 */
 			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 			
-			//creamos el participante y el concierto
-			Participante p = new Participante( "22:30", "1");
-			Concierto concierto = new Concierto();
-			concierto.setFecha("28-02-23");
-			concierto.setHora("22:00");
-			p.setEntrada("22:30");
-			p.setGrupo("Green Day");
 			
+
+			Concierto concierto = new Concierto();
+			concierto.setFecha("22-OCT-2022");
+			concierto.setHora("22:00");	
+			concierto.getParticipante().add(new Participante("22:30","Green Day"));
+			concierto.getParticipante().add(new Participante("23:15","The Offspring"));
+			concierto.getParticipante().add(new Participante("00:00","Simple Plan"));
+			concierto.getParticipante().add(new Participante("00:45","Coldplay"));
+			concierto.getParticipante().add(new Participante("01:15","U2"));
 			
 			//Convertimos un objeto a xml y lo imprimimos por pantalla
-			m.marshal(p, System.out);
-			
-			m.marshal(p, new File("participante.xml"));
+			m.marshal(concierto, System.out);
+			//tambien podemos crear un fichero
+			m.marshal(concierto, new File("conciertos.xml"));
+			System.out.println("Se ha creado con éxito el fichero");
 		} catch (JAXBException e) {
 			System.out.println("Error convertiendo el objeto a formato XML");
 			System.out.println(e.getMessage());

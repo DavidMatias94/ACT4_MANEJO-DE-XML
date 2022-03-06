@@ -4,7 +4,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-//anotación obligatoria
+
 @XmlRootElement(name="Participante")
 
 @XmlType(propOrder = {
@@ -32,7 +32,6 @@ public class Participante {
 		super();
 	}
 
-	//anotación opcional
 	@XmlElement
 	public String getEntrada() {
 		return entrada;
